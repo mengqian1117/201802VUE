@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<!--
+
+-->
+</body>
+</html>
+<script>
+/*
+  let set=new Set([1,1,NaN,"aa","aa",true,undefined]);
+  console.log(set);
+  let arr=[NaN,NaN,1,1,12,3,12,32];
+  console.log([...new Set(arr)]);
+
+  console.log(Object.is(NaN, NaN));
+
+  //size 个数
+
+  //add 增加一项 重复的加不上  返回当前set
+  console.log(set.add(1));
+  console.log(set.add(100));
+
+  //delete 删除 返回true/false
+  console.log(set.delete(1000));
+  console.log(set.delete(1));
+
+
+  //has 判断有没有 true /false
+  console.log(set.has(NaN));
+
+  //clear 清空 没有返回值undefined
+  //set.clear();
+  console.log(set);
+
+
+  let obj={name:"珠峰"};
+  console.log(obj);
+  obj.age=10;
+  delete obj.name;
+
+  //set只要value 遍历的时候只有value值
+  set.forEach((value, value2, set)=>{
+    //console.log(value, value2, set);
+  });
+
+  //都是遍历的value
+  console.log(set.keys());
+  console.log(set.values());
+  console.log(set.entries());
+
+  for (let key of set.keys()) {
+    console.log(key);
+  }
+
+
+  let a1=["A","B","C"];
+  for (let item of a1){
+    console.log(item);
+  }
+  console.log(a1.keys());
+  for (let key of a1.keys()){
+    console.log(key);
+  }
+  for (let [index,item] of a1.entries()){
+    console.log(index,item);
+  }
+  console.log(Array.prototype);
+  */
+</script>
+<script>
+  //对象的属性名必须是字符串 如果你写的不是字符串其他数据类型默认将其变成字符串
+  let a={};
+  let obj1={[a]:a};
+  console.log(obj1);
+
+  let map=new Map([[true,true],[{},{a:"a"}],[[],[]],[null,null]]);
+  //key可以是任意数据类型的
+  console.log(map);
+  //set(key,value) 返回值是这个 map
+  console.log(map.set(NaN, NaN));
+
+  //get(key)返回对应的value
+  console.log(map.get(true));
+
+  //has(key)->布尔值
+  console.log(map.has(NaN));//true
+
+  //clear  delete
+
+  //foEach keys  values  entries
+  map.forEach((value,key,c)=>{});
+  for (let key of map.keys()){
+    //console.log(key);
+  }
+  for (let value of map.values()){
+    //console.log(value);
+  }
+  for (let [key,value] of map.entries()) {
+    console.log(value, key);
+  }
+
+</script>

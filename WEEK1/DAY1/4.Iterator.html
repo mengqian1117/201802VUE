@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  let ary=[1,2,3];
+  console.log(ary);
+  console.log(ary[Symbol.iterator]);
+  // for (let item of ary){
+  //   console.log(item);
+  // }
+  //let iterator=ary.values();
+  let iterator=ary[Symbol.iterator]();
+  console.log(iterator);
+  console.log(iterator.next());
+  console.log(iterator.next());
+  console.log(iterator.next());
+  console.log(iterator.next());
+
+  function fn() {
+    return{
+      f(){}
+    }
+  }
+  let o=fn();
+  o.next();
+  fn().next();
+  fn().next();
+
+  function myIterator() {
+    return{
+      next(){
+        return{
+          value:1,
+          done:false
+        }
+      }
+    }
+  };
+
+
+
+  let o={
+    0:"AA",
+    1:"BB",
+    2:"CC",
+    length:3,
+  };
+  o.__proto__[Symbol.iterator]=function() {
+    let _this=this;
+    this.i=0;
+    return {
+      next(){
+        return{
+          value:_this[_this.i++],
+          done:_this.i>_this.length,
+        }
+      }
+    }
+  };
+  for (let item of o){
+    console.log(item);
+  }
+  console.log([...o]);
+
+
+</script>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body></body>
+</html>
+<script>
+  let obj={name:"珠峰",age:10};
+  //new Proxy(target目标对象,{代理的方法})
+  let proxy1=new Proxy(obj,{
+    get(target,prop){
+      //获取属性名的属性值的时候就会触发这个get
+      return target[prop];
+    },
+    set(target,prop,value){
+      target[prop]=value;
+    }
+  });
+  console.log(proxy1.age);
+  console.log(proxy1.name);
+  proxy1.name="孟倩";
+  console.log(obj.name);
+
+  console.log(Object.getOwnPropertyDescriptor(obj, "name"));
+  console.log(Object.getOwnPropertyDescriptor([1,2], "length"));
+  console.log(Object.getOwnPropertyDescriptor("111", "length"));
+  let s1="1111";
+  s1.length--;
+  console.log(s1.length);
+  // configurable:true   是否可配置  是否可以删除这个属性
+  // enumerable:true    是否可枚举
+  // value:"孟倩"
+  // writable:true    是否可修改
+
+  Object.defineProperty(obj,"name",{
+    value:"mq",
+    enumerable:false,
+    writable:false,
+    configurable:false
+  });
+  console.log(obj);
+  delete obj.name;
+  console.log(obj.name);//"mq"
+  obj.name="zzz";
+  console.log(obj.name);
+
+  console.log(obj);
+</script>

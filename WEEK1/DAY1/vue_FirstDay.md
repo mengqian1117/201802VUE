@@ -13,7 +13,6 @@
 - eval和arguments不能被重新赋值
 - arguments不会自动反映函数参数的变化
 - 不能使用arguments.callee
-- 不能使用arguments.caller
 - 禁止this指向全局对象
 - 不能使用fn.caller和fn.arguments获取函数调用的堆栈
 - 增加了保留字（比如protected、static和interface）;
@@ -56,7 +55,6 @@
 - Array.from()
 - Promise.all()
 - Promise.race()
-
 ##### 原生具备 Iterator 接口的数据结构如下。
 - Array
 - Map

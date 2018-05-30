@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<!--
+- forEach
+- map
+- find
+- findIndex
+- filter  返回一个新数组原数组不变
+- some
+- every
+以上都可以改this
+- reduce
+- reduceRight
+-->
+</body>
+</html>
+<script>
+  let arr=[,1,,5,,,,,];
+  console.log(arr);
+  console.log(0 in arr);
+  console.log(1 in arr);
+  arr.forEach((item)=>{
+    console.log(item);}
+    );
+  arr.find((item)=>{
+    console.log(item);
+  });
+
+  let ary=[1,2,"a",1,2];
+  let ary1=ary.filter((item,index)=>{
+    return typeof item=="number";
+  });
+  console.log(ary1);
+
+
+  //只要一个是true结果就是true
+  console.log(ary.some((item) => {
+    return typeof item=="string"
+  }));
+
+  //只要一个是false结果就是false
+  console.log(ary.every((item) => {
+    return typeof item=="string";
+  }));
+
+
+  let arr1=[1,2,3,4,5,6];
+
+  console.log(arr1.reduce((prev, item) => {
+    return prev + item;
+  },1000));
+  //prev   item     prev + item
+  //1       2        1+2
+  //1+2     3        1+2+3
+  //,.......
+
+  console.log(arr1.reduceRight((prev, item) => {
+    return prev + item;
+  }));
+
+
+  arr1.forEach(function () {
+    console.log(this);
+  },arr1);
+
+
+</script>

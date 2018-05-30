@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  //Symbol是是基本数据类型
+  //"Symbol()"
+  let sy=Symbol(); //只要通过Symbol函数得到的一个值是唯一的
+  let sy1=Symbol(); //只要通过Symbol函数得到的一个值是唯一的
+  console.log(sy,sy1);
+  console.log(sy==sy1);
+  //参数 表示对当前Symbol的描述
+  //为了可读性和好区分
+  let s1=Symbol("zf");
+  let s2=Symbol("zf");
+  console.log(s1,s2);
+  console.log(s1==s2);
+
+  console.log(s1.toString());
+  console.log(typeof s1);
+  const f1=Symbol();
+
+  //不可以进行运算 但是转布尔可以
+  //console.log(s1 + "");
+  //console.log(s1 + 1);
+  console.log(!s1);
+
+  let name=Symbol('name');
+  let obj={a:"AA"};
+  obj[name]="珠峰";
+  obj[Symbol('name1')]="珠峰1";
+  console.log(obj[name]);
+
+
+  for(let key in obj){
+    console.log(key);
+  }
+  //得到所有的属性名是Symbol类型的key 放在一个数组中
+  console.log(Object.getOwnPropertySymbols(obj));
+  console.log(Object.keys(obj));
+
+</script>
