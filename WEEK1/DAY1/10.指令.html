@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <!--v-text  只看做文本 innerText-->
+  <p v-text="text"></p>
+  <!--v-html 识别标签-->
+  <p v-html="text"></p>
+  <!--v-model 双向数据绑定-->
+  <input type="text" v-model="a">
+  <!--v-once:初始的时候渲染一次 以后不发生改变-->
+  <p v-once>{{a}}</p>
+
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      text:"<a>11</a>",
+      a:"11111"
+    }
+  })
+</script> 

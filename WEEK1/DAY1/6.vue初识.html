@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <!--{{小胡子语法:vue的数据,简单的运算表达式,三元运算}}-->
+  <!--不支持{{数据,数据}} 默认显示第一个-->
+{{name}} {{age+1}} {{sex?"男":"女"}}
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  //通过构造函数方式创建vue实例
+  let vm=new Vue({
+    el:"#app",//给当前实例设定一个管辖视图范围 不可以直接写成body或者html
+    data:{
+      name:"珠峰",
+      age:1,
+      sex:0,
+    }
+  })
+</script>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<!--
+v-model指令, 实现双向数据绑定
+value也是v-model的值
+-->
+<div id="app">
+  <input type="text" v-model="a">
+  {{a}}
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      a:"AA"
+    }
+  })
+</script> 

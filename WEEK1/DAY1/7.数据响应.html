@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  {{name}}
+  {{obj}}
+  {{arr}}
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm=new Vue({
+    el:"#app",
+    data:{
+      //加在data中的数据可以通过 vm.$data.XX获取 而且还将数据加在了vm上 可以通过vm.XX获取
+      name:"珠峰",
+      obj:{name:""},//对象中的属性初始化了之后才会有set和get 以后只要是对象中数据后面想要使用 必须在这里初始化一下
+      arr:[0,0,0],//后面再需要操作数组必须要改变数组的地址 重新赋值一个新的数组
+    },
+  });
+  console.log(vm.$data.name);
+  console.log(vm.name);
+
+  //vm.name="aa";
+  //vm.$data.obj.name="ff";
+  //可以通过$set增加的属性也会有set和get
+  //vm.$set(vm.obj,"name","ff");
+
+  //vm.arr[0]=10000;
+  //vm.arr[1]=10000;
+  //vm.arr=[10000];//改变原数组的地址
+</script>

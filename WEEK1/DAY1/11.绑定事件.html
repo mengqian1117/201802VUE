@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<script>
+  function fn(e) {
+    console.log(e);
+  }
+</script>
+<div onclick="fn(event)">1111</div>
+<!--<div onclick="fn(实参事件对象 window.event)">1111</div>-->
+
+<div id="app">
+  <!--绑定事件@事件类型="XX"-->
+  <div @click="fn">fnfn</div>
+  <!--<div @click="fn">fn不写()默认执行的时候就会传一个事件对象</div>-->
+  <div @click.self="fn($event)">fnfn
+
+    <i @click.once="fn">iii</i>
+  </div>
+  <!--<div @click="fn()">如果用到事件对象必须手动传 $event</div>-->
+  <!--
+  事件修饰符
+  .stop       阻止冒泡
+  .prevent   阻止默认行为
+  .capture   捕获阶段发生
+  .self      自己作为事件源的额时候才会发生
+  .once      执行一次
+  .passive 一般在移动端的滚动事件中使用 (不阻止默认行为) 修饰符尤其能够提升移动端的性能。
+
+
+.enter
+.tab
+.delete (捕获“删除”和“退格”键)
+.esc
+.space
+.up
+.down
+.left
+.right
+  -->
+
+  <input type="text" @keyup.enter="get" v-model="a">
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {a:1},
+    methods:{
+      //函数放在这里面 这里的this就是 vm
+      fn(e){
+        console.log(e);
+      },
+      get(){
+        this.a=100000;
+      }
+    }
+  });
+
+</script> 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <input type="text" v-model="name">
+  <input type="text" v-model="name">
+  <input type="text" v-model="age">
+  <p>{{name}} </p>
+  <p>{{age}}</p>
+</div>
+</body>
+</html>
+<script>
+  let data={name:"珠峰",age:10};
+  let app=document.getElementById("app");
+  let inputs=app.getElementsByTagName("input");
+  //获取app下面除了input之外的所有子元素节点
+  let nodeList=[...app.children].filter(item=>item.nodeName!="INPUT");
+  let cloneList=nodeList.map(item=>item.cloneNode(true));
+  for(let item of inputs){
+    if(item.getAttribute("v-model")){
+      item.value=data[item.getAttribute("v-model")];
+    }
+    item.oninput=function () {
+      data[this.getAttribute("v-model")]=this.value;
+    }
+  }
+  let reg=/\{\{(\w+)}}/;
+  nodeList.forEach((item)=>{
+    if(reg.test(item.innerHTML)){
+      item.innerHTML=item.innerHTML.replace(reg,(...arg)=>data[arg[1]])
+    }
+  });
+
+  Object.defineProperties(data,{
+    name:{
+      set(val){
+        //console.log(this==data);true
+        for(let item of inputs){
+          if(item.getAttribute("v-model")=="name"){
+            item.value=val;
+          }
+        }
+        cloneList.forEach((item,index)=>{
+          nodeList[index].innerHTML=item.innerHTML.replace(/\{\{name}}/g,()=>val)
+        })
+      },
+      get(){
+
+      }
+    },
+    age:{}
+  });
+  data.name="mq";
+  console.log(data);
+</script> 
