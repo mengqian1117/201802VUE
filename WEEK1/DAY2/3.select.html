@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <!--
+  1.单选  v-model中是一个值 存放的时候选中的option的value值没有value就是option中的内容
+  -->
+  <!--<select v-model="sel">-->
+    <!--<option value="1">小米</option>-->
+    <!--<option>大米</option>-->
+    <!--<option>花生米</option>-->
+    <!--<option>玉米</option>-->
+  <!--</select>-->
+  <!-- multiple 可以多选  v-model绑定数据就变成了一个数组  数组中存放是选中的所有option value 没有value用的是option的内容-->
+  <!--disabled 不可用 选不中-->
+  <select v-model="sel" multiple>
+    <option value="1">小米</option>
+    <option disabled>大米</option>
+    <option>花生米</option>
+    <option>玉米</option>
+  </select>
+  {{sel}}
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      sel:""
+    }
+  })
+</script> 

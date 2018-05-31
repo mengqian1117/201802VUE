@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <div>{{0.049444444111|toFixed(5)}}</div>
+  <!--写一个过滤器 保留两位小数-->
+  <!--过滤器函数如果不需要传参数 可以省略() 会默认执行的-->
+  <!--过滤器函数如果需要传参数 直接传参数(n)  在定义过滤器的是第一个参数仍然是理管道符前面的值-->
+</div>
+</body>
+</html>
+<!--
+值|过滤器  过滤器是个函数
+这个过滤器就是处理管道符前面的值的  将前面的值按照过滤器中定义的方式过滤
+-->
+<script src="js/vue.js"></script>
+<script>
+  //全局过滤器
+  Vue.filter("toFixed",(target,n)=>target.toFixed(n));
+
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    filters:{
+      // toFixed(target,n){
+      //   //target 默认传的 管道符前面的值
+      //   //n:你手动传的值
+      //   return target.toFixed(n);//四舍五入的形式
+      // },
+      addZero(target){
+        return target<10?"0"+target:target;
+      },
+
+    }
+  })
+</script> 

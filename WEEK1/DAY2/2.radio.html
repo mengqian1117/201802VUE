@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <!-- v-model 绑定相同的数据  这个数据存放的是被选中的value -->
+  <input type="radio" value="男" v-model="sex">男
+  <input type="radio" value="女" v-model="sex">女
+  {{sex}}
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      sex:"男"
+    }
+  })
+</script> 

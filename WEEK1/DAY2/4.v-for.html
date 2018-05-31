@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <!--v-for 加在想要循环元素上-->
+  <!--循环一个数字 n 1->n 例如 5 :1-5-->
+  <!--循环一个字符串 一项一项的循环 从索引为0到最后-->
+  <!--循环一个数组 一项一项的循环 从索引为0到最后 -->
+  <ul>
+    <!--<li v-for="item in 5">{{item}}</li>-->
+    <!--<li v-for="item in 'asdfg'">{{item}}</li>-->
+    <!--<li v-for="(item,index) in [1,2,3]">{{item}}{{index}}</li>-->
+    <!--<li v-for="item in obj">{{item}}</li>-->
+    <li v-for="(value,key) in obj">{{value}}{{key}}</li>
+  </ul>
+
+
+  <ul v-for="item in arr">
+    <li v-for="(value,key) in item">{{key}}:{{value}}</li>
+  </ul>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      obj:{name:"珠峰",age:10},
+      arr:[{name:"AA",age:"10"},{name:"BB",age:20},{name:"CC",age:30}]
+    }
+  })
+</script> 

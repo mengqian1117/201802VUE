@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <!--checkbox 中只有有了v-model 撤checked就没有作用了-->
+  <!--<input type="checkbox" checked value="apple" v-model="isCheck">apple-->
+
+  <!--多选 每一个checkbox的v-model都是同一个数据而且是一个数组 只要是选中checkbox就会将其value加在数组中  如果没有value结果就是null-->
+  <input type="checkbox" value="apple1" v-model="arr" @change="checkOne">apple1
+  <input type="checkbox" value="apple2" v-model="arr" @change="checkOne">apple2
+  <input type="checkbox" value="apple3" v-model="arr" @change="checkOne">apple3
+  <input type="checkbox" value="all" v-model="isCheck" @change="checkAll">all
+  <br>
+  {{arr}}
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      isCheck:false,
+      arr:[]
+    },
+    methods:{
+      checkOne(){
+        //all 是否被选中取决于arr的length是否为3
+        // isCheck 的值 就是 arr.length是不是3
+        this.isCheck=this.arr.length===3;
+      },
+      checkAll(){
+        //isCheck是 true  arr=["apple1","apple2","apple3"];
+        //isCheck是 false arr=[];
+        this.arr=this.isCheck?["apple1","apple2","apple3"]:[];
+      },
+    }
+  })
+</script> 

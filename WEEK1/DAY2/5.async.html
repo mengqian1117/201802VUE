@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+</body>
+</html>
+
+<script>
+  let f=async function fn() {
+    throw new Error("sorry");
+    return 1;
+  };
+  // f().then((res)=>{
+  //   console.log(res);
+  // }).catch((e)=>{
+  //   console.log(e);
+  // });
+
+  //语法糖 将复杂语法变成简单的表示
+  //await只能放在async函数中
+  let ff=async function f1() {
+    let a=await new Promise((resolve,reject)=>{
+     setTimeout(()=>{
+       resolve (10000);
+     },1000);
+      //reject("sorry");
+    });
+    console.log(a);
+  };
+  ff();
+  new Promise((resolve,reject)=>{
+    resolve (10000);
+  }).then((res)=>{
+    console.log(res);
+    },(e)=>{
+
+  })
+
+</script> 
