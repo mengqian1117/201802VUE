@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <div>
+    <!--<input type="checkbox" v-model="isAll">-->
+    <input type="text" v-model="n">
+    +
+    <input type="text" v-model="m">
+    =
+    <input type="text" v-model="x">
+
+    {{o}}
+  </div>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      is:true,
+      obj:{a:1},
+      n:10,
+      m:2
+    },
+    computed:{
+      //计算属性 在这里写的属性不要在data重复写 跟data中数据一样可以通过vm.数据获取或者修改
+      isAll:{
+        get(){
+          //只要获取这个属性就会触发get这个函数
+          return this.is;
+        },
+        set(val){
+          //val 设置的值
+          this.isAll=this.is;
+        }
+      },
+      x:{
+        get(){
+          //只要是依赖的值(必须有setter和getter响应的数据)发生改变了就会重新计算自己的值
+          return Number(this.n)+Number(this.m);
+        },
+        // set(){
+        //   this.x=this.n+this.m;
+        // }
+      },
+      o:{
+        get(){
+          //如果a没有再data的obj中初始化 就没有getter和setter响应 当改变this.obj.a时候不会影响 数据o
+          return this.obj.a+1;
+        }
+      }
+    },
+
+  })
+</script> 

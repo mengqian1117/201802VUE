@@ -39,4 +39,14 @@
 
   })
 
+  let g1=async function f10() {
+    await new Promise((resolve)=>{
+      setTimeout(()=>{resolve()},1000)
+    });
+    return 1;
+  };
+  g1().then((res)=>{
+    console.log(res);
+  })
+
 </script> 

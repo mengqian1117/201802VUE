@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <!--v-show="数据"将数据转成布尔值判断 如果是true就是显示否则隐藏  操作display-->
+  <!--v-if 操作元素 false直接将元素remove了-->
+  <!--如果频繁操作使用 v-show-->
+  <button @click="isShow=!isShow">切换</button>
+  <div v-show="isShow">珠峰培训</div>
+  <div v-if="isShow">珠峰培训</div>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      isShow:true
+    }
+  })
+</script> 

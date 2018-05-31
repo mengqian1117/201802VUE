@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+  <div class="container">
+    <div class="row">
+      <table class="table table-bordered  table-hover">
+        <caption style="caption-side: top" class="h1 text-danger text-center">购物车</caption>
+        <tr>
+          <th>全选 <input type="checkbox" v-model="isAll"></th>
+          <th>商品</th>
+          <th>单价</th>
+          <th>数量</th>
+          <th>小计</th>
+          <th>操作</th>
+        </tr>
+        <tr v-for="(item,index) in products">
+          <td><input type="checkbox" v-model="item.isSelected"></td>
+          <td>
+            <img :src="item.productCover" alt="">
+            <span>{{item.productName}}</span>
+          </td>
+          <td>¥{{item.productPrice}}</td>
+          <td>
+            <input type="number" min="0" v-model="item.productCount">
+          </td>
+          <td>
+            ¥{{item.productPrice*item.productCount|toFixed}}
+          </td>
+          <td>
+            <button class="btn btn-danger" @click="remove(index)">删除</button>
+          </td>
+        </tr>
+        <tr>
+          <!--colspan="6" 合并单元格-->
+          <td colspan="6">总价格 ¥{{sum|toFixed}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/axios.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    created(){
+      //生命周期函数 this->当前实例vm
+      //只要数据初始化完成之后就会触发
+      //一般请求数据的时候再这里请求
+      this.getData();
+    },
+    data: {
+      products:[],
+    },
+    methods:{
+      //写在这里的函数使用的时候都是通过this.方法()
+      async getData(){
+        this.products=(await axios.get("data/carts.json")).data;
+      },
+      remove(index){
+        this.products.splice(index,1);
+      },
+    },
+    filters:{
+      toFixed(target){
+        return Number(target).toFixed(2);
+      }
+    },
+    computed:{
+      isAll:{
+        get(){
+          return this.products.every(item=>item.isSelected);
+        },
+        set(val){
+          this.products.forEach((item)=>{
+            item.isSelected=val;
+          })
+        }
+      },
+      sum(){
+        let total=null;
+        this.products.forEach((item)=>{
+          total+=item.isSelected?item.productPrice*item.productCount:0;
+        });
+        return total;
+      },
+      ss:{
+        get(){},
+        //计算属性必须要有get可以没有set
+        // v-model绑定的计算属性有get和set
+        //其他的一般只有get
+        set(){}
+      },
+      xx(){
+        //如果这个计算属性只有get 可以写成一个函数的形式
+      },
+    }
+  })
+</script> 
