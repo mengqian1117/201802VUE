@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+  <link rel="stylesheet" href="css/animate.css">
+</head>
+<body>
+<div id="app">
+  <button @click="flag=!flag">切换</button>
+  <transition enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight">
+    <div v-show="flag"><h1>I LOVE YOU</h1></div>
+  </transition>
+
+  <transition-group enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight">
+   <div v-for="(item,index) in list" v-show="flag" :key="index">{{item}}</div>
+  </transition-group>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      flag:true,
+      list:["I","LOVE","YOU"]
+    }
+  })
+</script> 

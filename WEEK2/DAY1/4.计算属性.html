@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <input type="text" v-model="aa">
+  {{ss}}
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      aa:'珠峰',
+      num:0,
+    },
+    computed:{
+      ss(){
+        //第一次获取的时候 依赖值没有发生改变但是也会默认执行一次
+        //必须要有return 不支持异步
+        // let a="培训";
+        // setTimeout(()=>{
+        //   a=this.aa+a;
+        // },1000);
+        // return this.aa
+
+        // setTimeout(()=>{
+        //   this.num++;
+        // },1000);
+        // return this.num;
+      }
+    }
+  })
+</script> 

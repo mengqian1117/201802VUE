@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <input type="text" v-model="val">
+  {{obj.name}}
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      val:"珠峰",
+      obj:{name:"珠峰培训"}
+    },
+    //watch监控的属性是data中的属性
+    watch:{
+      //val 是被监控的属性 可以写成一个函数的形式 只要被监控的属性发生改变就会触发这个函数  默认第一次不会执行
+      // val(newVal,oldVal){
+      //   //每一次执行默认传两个参数 新值 和 旧值
+      //   console.log(newVal,oldVal);
+      // }
+      val:{
+        handler(newVal,oldVal){
+          console.log(newVal,oldVal);
+        },
+        //第一次执行一下 只传一个参数 就是当前值
+        immediate:true
+      },
+      obj:{
+        //默认监控对象的时候 里面的属性发生改变是监控不到的 因为监控的是对象的地址值
+        //如果想监控到属性的改变就加一个属性 deep:true 深度监控
+        //但是要注意 handler传的新值和旧值 内存里面都是改变后的值
+        handler(newVal,oldVal){
+          console.log(newVal,oldVal);
+        },
+        deep:true,
+      }
+    }
+
+  });
+
+
+</script> 

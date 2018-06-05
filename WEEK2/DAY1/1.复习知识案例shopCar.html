@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+  <div class="container">
+    <div class="row">
+      <table class="table table-bordered table-striped">
+        <caption style="caption-side: top" class="h1 text-danger">购物车</caption>
+        <tr>
+          <th>商品名称</th>
+          <th>商品价格</th>
+          <th>操作</th>
+        </tr>
+        <tr v-for="item in carList">
+          <td>{{item.name}}</td>
+          <td>{{item.price|add$()}}</td>
+          <td><button class="btn btn-danger btn-sm" @click="remove(item)">删除</button></td>
+        </tr>
+        <tr class="text-center" v-show="carList.length">
+          <td colspan="3"><button class="btn btn-danger" @click="carList=[]">全部删除</button></td>
+        </tr>
+      </table>
+      <form class="form-horizontal">
+        <div class="form-inline">
+          <label for="name" class="control-label">商品名称</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" id="name" v-model="name">
+          </div>
+        </div>
+        <div class="form-inline">
+          <label for="price" class="control-label">商品价格</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" id="price" v-model="price">
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-primary" @click.prevent="submit">提交</button>
+          <button type="reset" class="btn btn-danger">重置</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      carList:[{name:"衬衣",price:"$999"},{name:"袜子",price:"$9.9"},{name:"毛衣",price:"$99"},{name:"杯子",price:"$19.9"},{name:"秋裤",price:99.9}],
+      name:"",
+      price:""
+    },
+    filters:{
+      add$(target,val='$'){
+        let reg=/^(¥|\$)/;
+        return reg.test(target.toString())?target:val+target;
+      }
+    },
+    methods:{
+      remove(item){
+        this.carList=this.carList.filter(val=>val!=item);
+      },
+      submit(e){
+        this.carList.push({name:this.name,price:this.price});
+        this.name="";
+        this.price="";
+        //e.preventDefault();
+      }
+    }
+  })
+</script> 

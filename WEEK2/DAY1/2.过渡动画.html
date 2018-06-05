@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+  <style>
+    .box{
+      width: 200px;
+      height: 200px;
+      background-color: #00b3ee;
+    }
+    /*自定义动画效果*/
+    .fadeIn-enter{opacity: 0}
+    .fadeIn-enter-active{transition: all 2s}
+    .fadeIn-leave-active{transition: all 1s;opacity: 0}
+  </style>
+</head>
+<body>
+<div id="app">
+  <!--
+  vue中提供的有特殊意义的自定义标签 也叫组件
+  使用这个这个标签包起来的内容加上一些自定义的动画效果
+  -->
+  <button @click="flg=!flg">切换</button>
+  <transition name="fadeIn">
+    <div class="box" v-show="flg"></div>
+  </transition>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {flg:true}
+  })
+</script> 
