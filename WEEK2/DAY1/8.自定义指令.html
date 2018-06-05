@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+  <style>
+    .box{
+      width: 200px;
+      height: 200px;
+      background-color: #7a43b6;
+      cursor: move;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div v-red>颜色</div>
+  <div v-red>颜色</div>
+  <div v-color="'plum'">颜色</div>
+  <div v-color="'pink'">颜色</div>
+  <!--v-red 自定义指令 让字体颜色变红-->
+  <div v-drag class="box">
+    <img src="1.png" alt="" style="width: 100%;height: 100%">
+  </div>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    //定义指令的时候不需要加v-  使用的时候加上v-
+    directives:{
+      red(el){
+        //只要使用这指令 v-red 就会触发这个函数
+        //el:当前元素
+        //console.log(arguments);
+        el.style.color="red";
+      },
+      color(el,bindings){
+        //第二个参数 bindings.value就是 使用指令的时候赋的值
+        console.log(bindings.value);
+        el.style.color=bindings.value;
+      },
+      drag(el){
+        el.onmousedown=function (e) {
+          //this->el
+          this.l=e.clientX-this.offsetLeft;
+          this.t=e.clientY-this.offsetTop;
+          document.onmousemove=(e)=>{
+            //this->el
+            this.style.left=e.clientX-this.l+"px";
+            this.style.top=e.clientY-this.t+"px";
+          };
+          document.onmouseup=()=>{
+            document.onmousemove=null;
+            document.onmouseup=null;
+          };
+          e.preventDefault();
+          //return false;
+        }
+      }
+    }
+  });
+
+  console.log(Array(7).fill(1));
+  Number();
+  Boolean();
+  String();
+  Array();
+  Object();
+  console.log(Array(1, 2, 3));//[1,2,3]
+  console.log(Array(2));//[,,]
+  //Array.of跟Array一样使用 只是解决了一个问题就是传一个数字作为参数的时候 Array表示length
+  Array.of(2);//[2]
+</script>

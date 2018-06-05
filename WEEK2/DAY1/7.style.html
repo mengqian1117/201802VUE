@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <div style="color: yellowgreen">黄绿</div>
+  <div :style="{width:'100px',height:'100px',backgroundColor:'blue'}">黄绿</div>
+  <div :style="style1">style1</div>
+  <!--<div :style="{color:'red'}">style1</div>-->
+  <div :style="style2">style1</div>
+  <div :style="[style1,style2]">style1和style2</div>
+  <!--:要么是一个对象 要么是一个数组 数组每一项都是对象-->
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      style1:{color:"red"},
+      style2:{backgroundColor:"yellow"}
+    }
+  })
+</script> 

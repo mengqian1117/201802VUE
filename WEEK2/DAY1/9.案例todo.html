@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <style>
+    .sel{
+      color: #999;
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-sm-8  col-md-offset-3 col-sm-offset-2">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h2 class="text-center">主人你有{{num}}件未完成的事情</h2>
+            <input type="text" class="form-control" v-model="title" @keyup.13="addTodo">
+          </div>
+          <div class="panel-body">
+            <ul class="list-group">
+              <li class="list-group-item" v-for="item in filterList" @dblclick="cur=item">
+                <input v-show="cur==item" v-focus="cur==item" type="text" v-model="item.title" @keyup.13="cur=''" @blur="cur=''">
+                <span v-show="cur!==item">
+                  <input type="checkbox" v-model="item.isSelected">
+                  <span style="vertical-align: top" :class="{sel:item.isSelected}">
+                    {{item.title}}
+                  </span>
+                </span>
+                <button class="btn btn-xs btn-danger pull-right" @click="remove(item)">&bigotimes;</button>
+              </li>
+            </ul>
+          </div>
+          <div class="panel-footer">
+            <ul class="nav nav-pills">
+              <li role="presentation" :class="{active:hash=='all'}">
+                <a href="#/all">全部完成</a>
+              </li>
+              <li role="presentation" :class="{active:hash=='finish'}">
+                <a href="#/finish">已完成</a>
+              </li>
+              <li role="presentation" :class="{active:hash=='unFinish'}">
+                <a href="#/unFinish">未完成</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      todoList:[{title:"约会",isSelected:true},{title:"看电影",isSelected:false}],
+      title:"",
+      cur:"",//双击的那个li里面的item,
+      hash:""
+    },
+    computed:{
+      num(){
+        //todoList中isSelected是false的个数
+        return this.todoList.filter(item=>!item.isSelected).length;
+      },
+      filterList(){
+        //依赖hash
+        //记录在 localStorage 本地存储 只要不是清楚浏览器缓存就会永久保存
+        //存储的时候注意存储的是字符串
+        localStorage.setItem("todo",JSON.stringify(this.todoList));
+
+        if(this.hash=="all") return this.todoList;
+        if(this.hash=="finish") return this.todoList.filter(item=>item.isSelected);
+        if(this.hash=="unFinish") return this.todoList.filter(item=>!item.isSelected);
+      }
+    },
+    methods:{
+      addTodo(){
+        //向数组todoList添加一项
+        this.todoList.unshift({title:this.title,isSelected:false});
+        this.title="";
+      },
+      remove(item){
+        this.todoList=this.todoList.filter(val=>val!=item);
+      }
+    },
+    directives:{
+      focus(el,bindings){
+        if(bindings.value){
+          el.focus();
+        }
+      }
+    },
+    created(){
+      //从缓存中获取出来 给todoList赋值
+      if(localStorage.getItem("todo")){
+        this.todoList=JSON.parse(localStorage.getItem("todo"));
+      }
+
+      //可以使用this下面的数据
+      this.hash=location.hash.split("/")[1]||"all";
+      window.addEventListener("hashchange",()=>{
+        //获取hash值
+        //console.log(location.hash);
+        //'#/all'->["#","all"]
+        this.hash=location.hash.split("/")[1];
+      })
+    }
+  });
+</script> 

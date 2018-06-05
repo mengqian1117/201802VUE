@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+  <style>
+    .red{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div :class="box"></div>
+  <div :class="{box1:false}"></div>
+  <div :class="{box1:false,box2:true}"></div>
+  <!--如果:class绑定的是一个对象 根据每一个属性名对应的属性值判断有没有这个属性名作为className-->
+  <div :class="['box1','box2']"></div>
+  <div :class="['box1','box2'][0]"></div>
+  <!--如果绑定的是一个数组 数组的每一项都作为className 也可以同过索引取出来-->
+  <!--[box1,box2]-->
+
+  <input type="text" v-model="val" @keyup.enter="val1=val">
+
+  <h2 :class="{red:val1==item}" v-for="item in arr">{{item}}</h2>
+
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      box:"box",
+      val:"",
+      val1:"",
+      arr:["js","css","vue","node",'react'],
+      classList:[]
+    }
+  })
+</script> 
