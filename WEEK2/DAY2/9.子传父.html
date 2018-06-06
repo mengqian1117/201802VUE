@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <h1>{{money}}</h1>
+  <child :m="money" @change-money="change" ></child>
+  <!--订阅一个自定义的事件 changeMoney 由child控制的 -->
+</div>
+<template id="child">
+  <div>
+    <h2>{{m}}</h2>
+    <button @click="getMore">更多红包</button>
+  </div>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let child={
+    template:"#child",
+    data(){
+      return{
+        mm:'',
+      }
+    },
+    props:["m"],
+    methods:{
+      getMore(){
+        //发布之前订阅的事件
+        console.log(this.mm=this.m);
+        this.mm=1000000000000000;
+        //第二个参数就是给之前订阅的事件传参数用的
+        this.$emit("change-money",this.mm);
+      }
+    }
+  };
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      money:100,
+    },
+    components:{child},
+    methods:{
+      change(res){
+        //自己修改自己的data  让子组件控制这个函数执行
+        this.money=res;
+      }
+    }
+  })
+</script> 

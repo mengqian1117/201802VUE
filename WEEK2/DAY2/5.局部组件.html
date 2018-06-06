@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <!--使用组件-->
+  <component1></component1>
+  <component2></component2>
+</div>
+</body>
+</html>
+<!--
+1.定义组件  对象
+2.注册组件
+3.使用组件
+
+
+组件都是独立的
+-->
+<script src="js/vue.js"></script>
+<script>
+
+
+  //1.定义组件
+  let component1={
+   template:"<div><h2 @click='fn'>{{val}}</h2></div>",
+   data(){
+     return{
+       val:"我是组件1"
+     }
+   },
+   methods:{
+     fn(){
+       console.log(this);
+     }
+   }
+
+ };
+
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    components:{
+      //注册组件
+      component1,
+      component2:{template:"<div><h2>我是组件2</h2></div>"}
+    }
+  })
+</script> 

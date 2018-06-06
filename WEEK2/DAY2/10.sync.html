@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <h1>{{money}},{{s}}</h1>
+  <child :m.sync="money" :s.sync="s"></child>
+</div>
+<!--语法糖 .sync   -->
+<!--子组件更新自己的属性 让绑定的父组件的数据同步修改-->
+<template id="child">
+  <div>
+    <h2>{{m}}</h2>
+    <button @click="getMore">再来点</button>
+  </div>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      money:100,
+      s:"vue"
+    },
+    methods:{},
+    components:{
+      child:{
+        template:"#child",
+        props:["m","s"],
+        methods:{
+          getMore(){
+            this.$emit("update:m",10000);
+            this.$emit("update:s","VUE");
+          }
+        }
+      },
+    },
+  })
+</script> 

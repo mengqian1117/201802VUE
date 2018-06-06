@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <parent></parent>
+</div>
+
+<template id="parent">
+  <div>
+    <h1>{{val}}</h1>
+    <child :i="index" :m="val"></child>
+  </div>
+</template>
+<template id="child">
+  <div>
+    <h2>我是第{{i}}个儿子</h2>
+    <h2>父亲说:{{m}}</h2>
+  </div>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let child={
+    template:"#child",
+    //使用props获取 组件在使用的时候从父组件获取的数据
+    //pros放着所有属性   属性是字符串
+    props:["i","m"],
+  };
+  let parent={
+    template:"#parent",
+    data(){
+      return{
+        val:"我是父亲",
+        index:2,
+      }
+    },
+    components:{child}
+  };
+
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    components:{parent}
+  })
+</script> 

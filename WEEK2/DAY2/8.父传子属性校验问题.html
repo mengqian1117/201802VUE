@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <temp1 :m="money"></temp1>
+  <temp1 :m="1"></temp1>
+  <temp1></temp1>
+</div>
+<template id="temp1">
+  <div>
+    <h1>{{m}}</h1>
+  </div>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let temp1={
+    template:"#temp1",
+    props:{
+      // m:{
+      //   //type:Number  类型单一
+      //   //type:[Number,String], //类型多选的
+      //   //required:true,
+      //   default:100000,
+      //   //自定义校验
+      //   validator(val){
+      //     //一般不太使用
+      //     //return true 通过校验 false没有通过校验
+      //     return val>100;
+      //   },
+      //
+      // } ,
+      //m:Number,//这种写法校验的是type
+      m:[Number,String],//这种写法校验的是type
+    },
+  };
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      money:1000,
+    },
+    components:{temp1}
+  })
+</script> 
