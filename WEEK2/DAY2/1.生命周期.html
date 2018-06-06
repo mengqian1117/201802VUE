@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  {{a}}
+</div>
+<!--<div id="app1">-->
+  <!--{{a}}-->
+<!--</div>-->
+<!--
+beforeCreate   created
+beforeMount    mounted
+beforeUpdate   updated
+beforeDestroy  destroyed
+-->
+<!--template vue提供的用来包裹元素的自定义标签-->
+<template id="temp1">
+  <!--只能有一个根元素-->
+  <!--<div></div>-->
+  <div>
+    <h1>{{a}}</h1>
+  </div>
+</template>
+
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    //template 只能有一个根元素包裹
+    //template:"<div><h1>{{a}}</h1></div>",
+    template:"#temp1",
+    //如果有了template 就相当于直接换掉#app
+    data: {
+      a:"珠峰"
+    },
+    methods:{
+      fn:function () {
+
+      }
+    },
+    beforeCreate(){
+      //几乎不用
+      //数据初始化之前 在这里获取不到data中的数据
+      console.log(this.a);
+      debugger;
+    },
+    created(){
+      //数据初始化完成 可以获取和操作data中的数据
+      //一般数据请求在这个实现
+      console.log(this.fn);
+      console.log(this.a);
+      debugger;
+    },
+    beforeMount(){
+      //挂载之前 判断渲染模板正确与否
+      debugger
+    },
+    mounted(){
+      //挂载完成 视图就渲染了
+      debugger;
+    },
+    beforeUpdate(){
+      //数据更新之前
+      debugger;
+    },
+    updated(){
+      //数据更新完成  一般使用watch代替
+      debugger;
+    },
+    beforeDestroy(){
+      //销毁之前
+      debugger;
+    },
+    destroyed(){
+      //销毁完成
+      debugger;
+    }
+  });
+  //只有没有el的时候才会看 $mount
+  //vm.$mount("#app1");///跟el:"#app"一样的效果
+  //vm.$destroy 手动销毁实例
+  //销毁 不会销毁之前的内容 渲染好的页面也保留下来 但是后面实例就不再起作用了
+  vm.$destroy();
+  console.log(vm);
+  vm.a="zf";
+</script> 

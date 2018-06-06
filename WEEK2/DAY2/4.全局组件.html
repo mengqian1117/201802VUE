@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <!--标签支持吃小写或者 - 写成大写也编译成小写的 -->
+  <vbox></vbox>
+  <vBox></vBox>
+  <v-box></v-box>
+  <v-box></v-box>
+  <v-box></v-box>
+  <v-box></v-box>
+  <v-box></v-box>
+  <v-box></v-box>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<!--
+做开发的时候一般使用情况
+定义组件名字使用驼峰命名
+使用组价的时候用中杠的形式
+-->
+<script>
+  //组件是独立的  生命周期是独立 数据也是独立的
+  //组件的data必须是一个函数
+  //Vue.component("组件名",{})
+  Vue.component("vbox",{
+    template:"<div><h1>{{msg}}</h1></div>",
+    data(){
+      return{
+        msg:"我是独立的组件",
+      }
+    }
+  });
+  //如果组件名是驼峰命名 使用的时候标签是中杠的形式
+  Vue.component("vBox",{
+    template:"<div><h1>我是全局组件</h1></div>"
+  });
+  //vBox代表 template里面的html结构
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      msg:"珠峰"
+    }
+  })
+</script> 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <!--ref:vue提供的 给想要获取的元素加一个属性ref="值"-->
+  <!--ref值相同了 因为存储的是对象形式 属性名不可以重复 只能获取一个 后面的覆盖前面的-->
+  <div ref="box">{{msg}}</div>
+  <div ref="box">{{msg}}</div>
+  <div ref="box1">{{msg}}</div>
+  <div ref="box2">{{msg}}</div>
+  <!--通过循环得到的元素 加上ref 得到的值是一个数组 里面存放着循环出的所有的元素-->
+  <p ref="p" v-for="item in list">{{item}}</p>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      msg:"珠峰",
+      list:[1,2,3]
+    },
+    mounted(){
+      //挂载完成了 如果想要获取渲染好的DOM元素在这里获取
+      //this.$refs是一个对象 这里面存着加了ref属性的元素
+      //{ref后面的值 : 元素}
+      //{box:div,box1:div,box2:div}
+      //可以通过指定的属性名(ref的值)获取想要的元素
+      this.list = [1,2,3,4,5];
+      //渲染DOM 是异步的 这里仍然是渲染之前的
+      console.log(this.$refs.p);//3
+      this.$nextTick(()=>{
+        //等DOM渲染完成之后再做执行
+        console.log(this.$refs.p);//5
+      });
+
+      //console.log(this.$refs.box);
+    },
+    // mounted(){
+    //   //一般操作元素都在这里操作 为了了保证元素的真实性 一般都在外面包一个
+    //   //this.$nextTick()
+    // },
+    updated(){
+      console.log(this.$refs.p.length);
+    }
+  });
+
+
+
+  let a=1;
+  setTimeout(()=>{a=100},1000);
+  console.log(a);
+</script> 

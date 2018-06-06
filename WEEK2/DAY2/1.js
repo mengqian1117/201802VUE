@@ -1,0 +1,16 @@
+//console.log(process);
+process.nextTick(()=>{
+  //当前队列最后执行
+  console.log(1);
+});
+console.log(2);
+console.log(3);
+console.log(4);
+setTimeout(()=>{
+  //等待队列执行
+  console.log(11);
+},1000);
+setImmediate(()=>{
+  //等待队列先执行
+  console.log(22);
+});

@@ -94,6 +94,7 @@
     directives:{
       focus(el,bindings){
         if(bindings.value){
+          console.log(el);
           el.focus();
         }
       }
