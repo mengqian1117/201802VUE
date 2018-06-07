@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <button @click="hide">点你</button>
+  <!--给组件加一个ref属性-->
+  <child ref="child"></child>
+</div>
+
+<template id="temp1">
+  <div>
+    <h1 v-show="flg">我是子组件</h1>
+    <h2 ref="h2">哈哈</h2>
+  </div>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let child={
+    template:"#temp1",
+    data(){
+      return{
+        flg:true
+      }
+    },
+    methods:{
+      hide(){
+        this.flg=false;
+      }
+    }
+  };
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    components:{child},
+    methods:{
+      hide(){
+        //在这里拿到子组件的方hide执行
+        console.log(this.$refs.child);//组件child
+        this.$refs.child.hide();
+        this.$refs.child.$refs.h2.style.color="red";
+      }
+    }
+  })
+</script> 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <h2>{{msg}}</h2>
+  <child ref="child"></child>
+</div>
+<template id="t1">
+  <h1 ref="h1">{{msg}}</h1>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let child={
+    template:"#t1",
+    data(){
+      return {msg:"珠峰培训"}
+    },
+    created(){debugger},
+    beforeMount(){debugger},
+    mounted(){
+      this.msg="zhufengpeixun";
+      debugger;
+    },
+    beforeUpdate(){debugger;},
+    updated(){debugger;}
+  };
+  // 组件的数据修改只会触发自己的beforeUpdate和 updated 不会触发父组件的生命周期
+  let vm = new Vue({
+    el: "#app",
+    data: {msg:"vue学习"},
+    components:{child},
+    created(){debugger},
+    beforeMount(){debugger},
+    mounted(){
+      //以后在父组件的mounted中加一个this.$nextTick 将获取自己或者是子组件的元素放在里面 保证拿到的是最新渲染后的
+      this.$nextTick(()=>{
+        console.log(this.$refs.child.$refs.h1.innerHTML);
+        debugger;
+      });
+      debugger
+    },
+    beforeUpdate(){debugger;},
+    updated(){debugger;}
+  });
+
+
+  //vm.created->vm.beforeMount->child.created->child.beforeMount->child.mounted->vm.mounted
+  //修改子组件的数据:vm.created->vm.beforeMount->child.created->child.beforeMount->child.mounted->vm.mounted->child.beforeUpdate->child.updated(页面修改了)->this.$nextTick
+</script>

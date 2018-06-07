@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <say>
+    <span slot="lover">宝贝</span>
+    <p slot="text">我想你了</p>
+    <!--<strong slot="me">爱你的人</strong>-->
+  </say>
+</div>
+<template id="say">
+  <div>
+    <h1>
+      亲爱的<slot name="lover"></slot>
+    </h1>
+    <slot name="text"></slot>
+    <h2>
+      <slot name="me">爱你的人</slot>
+    </h2>
+  </div>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let say={
+    template:"#say"
+  };
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    components:{
+      say
+    }
+  })
+</script> 

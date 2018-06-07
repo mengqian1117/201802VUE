@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+  <style>
+    .bg{
+      position: fixed;
+      background-color: #ddd;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top:0;
+    }
+    .bg .mask{
+      width:350px;
+      height: 250px;
+      background-color: #fff;
+      position: absolute;
+      left: 50%;
+      margin-left: -175px;
+      top: 200px;
+    }
+    .bg span{
+      float: right;
+      font-size: 30px;
+      cursor: pointer;
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <button @click="flg=true">弹出</button>
+  <log v-show="flg" :flg.sync="flg"></log>
+</div>
+<template id="log">
+  <div class="bg">
+    <div class="mask">
+      <span @click="close">×</span>
+    </div>
+  </div>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let log={
+    template:"#log",
+    data(){
+      return{}
+    },
+    props:["flg"],
+    methods:{
+      close(){
+        this.$emit("update:flg",false)
+      }
+    }
+  };
+  let vm = new Vue({
+    el: "#app",
+    data: {flg:false},
+    components:{log}
+  })
+</script> 

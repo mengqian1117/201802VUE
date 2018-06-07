@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+<div id="app" class="container">
+  <div class="row">
+    <div class="col-sm-8 col-md-6 col-lg-4 col-sm-offset-2 col-md-offset-3 col-lg-offset-4">
+      <!--注意传的是字符串'primary'-->
+      <panel :type="'danger'" @say-song="saySong">
+        <h3 ref="title" slot="title">我们不一样</h3>
+        <div slot="content">
+          <p>我们不一样</p>
+          <p>每个人都有不同的境遇</p>
+          <p>我们在这里 </p>
+          <p>在这里等你</p>
+          <p>我们不一样</p>
+          <p>虽然会经历不同的事情</p>
+          <p>我们都希望</p>
+          <p>来生还能相遇</p>
+        </div>
+        <div slot="author">
+          <p>词曲:高进</p>
+          <p>演唱:大壮</p>
+        </div>
+      </panel>
+    </div>
+  </div>
+</div>
+<template id="panel">
+  <div :class="['panel','panel-'+type]">
+    <div class="panel-heading">
+      <slot name="title"></slot>
+    </div>
+    <div :class="['panel-body','text-'+type]">
+      <slot name="content"></slot>
+    </div>
+    <div class="panel-footer">
+      <slot name="author">
+        <p>匿名</p>
+      </slot>
+      <button :class="['btn','btn-'+type]" @click="say">点击弹出歌名</button>
+    </div>
+  </div>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let panel={
+    template:"#panel",
+    props:{
+      type:{
+        type:String,
+        default:"default"
+      }
+    },
+    methods:{
+      say(){
+        this.$emit("say-song")
+      }
+    }
+  };
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    components:{panel},
+    methods:{
+      saySong(){
+        alert(this.$refs.title.innerText);
+      }
+    }
+  })
+</script> 

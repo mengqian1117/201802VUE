@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <!--Component is="这里是什么组件就显示什么组件"-->
+  <!--Component 首字母大写小写都可以-->
+  <input type="radio" v-model="sel" value="com1">com1
+  <input type="radio" v-model="sel" value="com2">com2
+  <!--<Component is="com1"></Component>-->
+  <!--Component 只能放一个组件 组件之间切换的时候就是销毁之前的组件 重建新的组件 这样会浪费性能 -->
+  <!--keep-alive 这样组件不会销毁 只是缓存一下-->
+  <keep-alive>
+    <Component :is="sel"></Component>
+  </keep-alive>
+
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let com1={
+    template:"<h2>我是com1</h2>",
+    created(){
+      //debugger;
+    },
+    beforeDestroy(){
+      debugger;
+    }
+  };
+  let com2={
+    template:"<h2>我是com2</h2>"
+  };
+  let vm = new Vue({
+    el: "#app",
+    data: {sel:''},
+    components:{com1,com2}
+  })
+</script> 

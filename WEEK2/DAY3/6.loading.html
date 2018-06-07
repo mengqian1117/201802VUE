@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <loading ref="loading"></loading>
+</div>
+<template id="loading">
+  <h1 v-show="flg">疯狂加载中.......</h1>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let loading={
+    template:"#loading",
+    data(){
+      return{flg:true}
+    },
+    methods:{
+      hide(){
+        this.flg=false;
+      }
+    }
+  };
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    components:{loading},
+    //加载完成是在生命周期的mounted中
+    mounted(){
+      setTimeout(()=>{
+        this.$refs.loading.hide();
+      },2000);
+    }
+  });
+</script> 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<!--slot-->
+<div id="app">
+  <box>
+    <h1>我是标题1</h1>
+    <h2 slot="wg">王刚</h2>
+    <h2 slot="wc">王闯</h2>
+    <h2 slot="wh">王虎</h2>
+    <h2 slot="wf">王菲</h2>
+    <h2 slot="wlh">王力宏</h2>
+  </box>
+</div>
+<!--
+组件中的标签给他加一个 属性slot="起的名"
+组件中定义的模板的slot 对应有name属性 将对应的名字的标签放进去
+-->
+<template id="temp1">
+  <div>
+    第一名:
+    <slot name="wc"></slot>
+    第二名:
+    <slot name="wg"></slot>
+    第三名:
+    <slot name="wf"></slot>
+    第四名:
+    <slot name="wh"></slot>
+    <!--default  这里放的是没有slot属性的标签 可以省略 default -->
+    <!--<slot></slot>-->
+    <slot name="default"></slot>
+    <!--没有匹配到对应的name 显示slot的内容-->
+    <slot name="mq"><h3>孟倩</h3></slot>
+  </div>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let box={
+    template:"#temp1"
+  };
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    components:{box}
+  })
+</script> 
