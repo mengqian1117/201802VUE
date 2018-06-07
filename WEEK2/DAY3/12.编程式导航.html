@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <router-view></router-view>
+</div>
+<template id="home">
+  <div>
+    <h1>home</h1>
+    <button @click="goList">跳转到list</button>
+  </div>
+</template>
+<template id="list">
+  <div>
+    <h1>list</h1>
+    <button @click="goHome1">goHome1</button>
+    <button @click="goHome2">goHome2</button>
+  </div>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+  let Home={
+    template:"#home",
+    methods:{
+      goList(){
+        this.$router.push("/list");
+        //this.$router.replace("/list")
+      }
+    }
+  };
+  let List={
+    template:"#list",
+    methods:{
+      goHome1(){
+        this.$router.replace("/home")
+      },
+      goHome2(){
+        this.$router.push("/")
+      },
+    }
+  };
+  //组件都有俩个属性 $router(放的函数)  $route(属性)
+  //$router : go  back  forward  push  replace
+  let router=new VueRouter({
+    routes:[
+      {path:"/",component:Home},
+      {path:"/home",component:Home},
+      {path:"/list",component:List},
+    ]
+  });
+
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    router,
+  })
+
+
+
+  //[/,/list,/,/home]
+</script> 

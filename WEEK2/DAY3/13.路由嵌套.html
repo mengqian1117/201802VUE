@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <router-link to="/home">首页</router-link>
+  <router-link to="/list">列表</router-link>
+  <router-view></router-view>
+</div>
+<template id="home">
+  <h1>首页</h1>
+</template>
+<template id="list">
+  <div>
+    <router-link to="/list/list1">list1</router-link>
+    <router-link to="/list/list2">list2</router-link>
+    <router-view></router-view>
+  </div>
+</template>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+  let Home={template:"#home"};
+  let List={template:"#list"};
+  let List1={template:"<h2>list1</h2>"};
+  let List2={template:"<h2>list2</h2>"};
+  let router=new VueRouter({
+    routes:[
+      {path:"/",component:Home},
+      {path:"/home",component:Home},
+      {
+        path:"/list",
+        component:List,
+        //子路由
+        children:[
+          //子路由的路径不要写/
+          {path:'list1',component:List1},
+          {path:'list2',component:List2},
+        ]
+      },
+    ]
+  });
+
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    router,
+  })
+</script> 

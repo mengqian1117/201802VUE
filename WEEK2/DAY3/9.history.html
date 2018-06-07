@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<!--
+vue路由两种模式 默认使用hash模式
+
+哈希值  # 开发使用
+history 直接将url变了 需要后台配合 上线的时候使用
+history:BOM  操作浏览器的历史记录
+-->
+<div id="app"></div>
+<h1>history</h1>
+<a href="9.html">9</a>
+<button onclick="go()">前进</button>
+<button onclick="fn()">点击</button>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {}
+  });
+
+  console.log(history);
+  //go(n)   n>0 前进n页  n<0 后退n页
+  //back()    回退一页  go(-1)
+  //forward() 前进一页  go(1)
+  function go() {
+    //history.forward();
+    history.go(1)
+  }
+
+
+  //[9.history.html,9.html]
+  //[9.html]
+  function fn() {
+    //后面 的url必须是同源
+    //history.pushState(null,null,"https://www.baidu.com/")
+    //pushState 在记录中 多加一条记录,并且url地址栏显示的是当前新加记录
+    //history.pushState(null,null,"9.html");
+    history.replaceState({name:"珠峰"},null,"9.html");
+    console.log(history);
+  }
+</script> 

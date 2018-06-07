@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+  <style>
+    .active{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  珠峰
+  <!--将router-link 渲染成a标签-->
+  <!--可以指定 router-link 渲染成什么样标签 tag="标签名"-->
+  <router-link to="/home" tag="button">首页</router-link>
+  <router-link to="/list">列表</router-link>
+
+  <!--router-view 路由对应的组件显示的位置-->
+  <router-view></router-view>
+  培训
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<!--必须是先引入vue 再引入vue-router-->
+<script>
+  //1.定义组件
+  let Home={template:"<h1>HOME</h1>"};
+  let List={template:"<h1>LIST</h1>"};
+  //2.路由的映射表  路由<->组件
+  let routes=[
+    {path:"/home",component:Home},
+    {path:"/list",component:List},
+  ];
+
+  //构造函数方式创建 router
+  //只要创建VueRouter 页面的地址 就会多加一个#/
+  //路由默认使用的是hash的方式
+  let router=new VueRouter({
+    routes,
+    linkActiveClass:"active"
+  });
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    //注入 路由 router
+    router,//简写的形式 router: router
+  });
+</script> 

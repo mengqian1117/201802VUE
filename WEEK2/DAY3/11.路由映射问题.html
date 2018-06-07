@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <router-link to="/home">首页</router-link>
+  <router-link to="/list">列表</router-link>
+  <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+  let Home = {template: "<h1>HOME</h1>"};
+  let List = {template: "<h1>LIST</h1>"};
+  let router = new VueRouter({
+    //mode:"history",
+    routes:[
+      //首次打开 默认路径是 '/'
+      {path:"/",component:Home},
+      // {path:"/",redirect:"/home"},
+      {path:"/home",component:Home},
+      {path:"/list",component:List},
+      //从上到下依次匹配 都没有匹配到就走最后一个 所以*放在最后
+      //redirect 重定向
+      {path:"/*",redirect:"/home"},
+    ],
+    linkActiveClass:"active"
+  });
+
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    router,
+  })
+</script> 
