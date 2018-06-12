@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+  <style>
+    #app{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
+    .box1{
+      background-color: #ddd;
+      width: 300px;
+      height: 300px;
+    }
+    .box2{
+      background-color: #fff3cd;
+      width: 500px;
+      height: 300px;
+    }
+    .box1 a{
+      display: block;
+      line-height: 40px;
+      font-size: 20px;
+    }
+
+  </style>
+</head>
+<body>
+<div id="app">
+  <input type="text" v-model="id">
+  <div class="box1">
+    <!--通过name和params匹配-->
+    <router-link :to="{name:'list',params:{id:1}}">商品1</router-link>
+    <!--<router-link to="/list/1">商品1</router-link>-->
+    <!--<router-link to="/list/2">商品2</router-link>-->
+    <!--<router-link to="/list/3">商品3</router-link>-->
+    <!--<router-link to="/list/4">商品4</router-link>-->
+    <!--<router-link to="/list/5">商品5</router-link>-->
+    <router-link :to="{name:'list',params:{id:item}}" v-for="(item,index) in arr" :key="index">商品5</router-link>
+    <router-link :to="{name:'list',params:params}">商品666666</router-link>
+  </div>
+  <div class="box2">
+    <router-view></router-view>
+  </div>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+  let List={
+    template:"<h1>商品{{$route.params.id}}</h1>"
+  };
+  let router=new VueRouter({
+    routes:[
+      {path:"/list/:id",component:List,name:"list"}
+    ]
+  });
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      id:1,
+      arr:[1,2,3,4,5]
+    },
+    computed:{
+      params(){
+        return {id:this.id}
+      }
+    },
+    router,
+  })
+</script> 

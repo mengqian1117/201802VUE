@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>201803JS</title>
+</head>
+<body>
+<div id="app">
+  <router-link to="/list/1/99">列表1</router-link>
+  <router-link :to="{path:'/list/1/99'}">列表1</router-link>
+  <router-link to="/list/2/88">列表2</router-link>
+  <router-link to="/list/3/100">列表3</router-link>
+  <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+  //还有一个属性$route 里面存放着所有的属性 参数params   name
+  let List={
+    template:"<h1>商品{{$route.params.id}},价格是{{$route.params.price}}</h1>",
+    //根据路由的变化去请求不同的数据
+    watch:{
+      $route(){
+        console.log(this.$route.params);
+      }
+    }
+  };
+  let router=new VueRouter({
+    routes:[
+      //只要是:XX 就是参数 都放在$route.params这个对象中 属性名是XX属性值就是 上面to=""后面的路径
+      {path:"/list/:id/:price",component:List}
+    ]
+  });
+  let vm = new Vue({
+    el: "#app",
+    data: {},
+    router,
+  });
+
+
+
+</script>
+<!--http://i.waimai.meituan.com/restaurant/478537668054510-->
+<!--http://i.waimai.meituan.com/restaurant/364068199669576-->
+<!--http://i.waimai.meituan.com/restaurant/469256243772924-->
