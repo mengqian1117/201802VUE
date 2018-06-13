@@ -1,13 +1,12 @@
 <template>
   <div id="app">
-    App
+    <router-view></router-view>
+
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+export default {}
 </script>
 
 <style>
@@ -18,5 +17,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.van-tabbar-item--active{
+  color: orange;
 }
 </style>
