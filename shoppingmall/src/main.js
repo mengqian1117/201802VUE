@@ -16,3 +16,5 @@ new Vue({
   // components:{App},
   render:(h)=>h(App)
 });
+let W=document.documentElement.clientWidth||document.body.clientWidth;
+document.documentElement.style.fontSize=W/640 *100 +"px";
