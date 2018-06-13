@@ -6,8 +6,8 @@ import router from './router'
 //导入样式
 //import "vant/lib/vant-css/index.css"
 //使用babel-plugin-import 插件实现按需导入
-import {Icon,Tabbar,TabbarItem} from "vant"
-Vue.use(Icon).use(Tabbar).use(TabbarItem);
+import {Icon,Tabbar,TabbarItem,Lazyload,Search,Row,Col,Cell, CellGroup} from "vant"
+Vue.use(Icon).use(Tabbar).use(TabbarItem).use(Lazyload).use(Search).use(Row).use(Col).use(Cell).use(CellGroup);
 Vue.config.productionTip = false;
 new Vue({
   el: '#app',

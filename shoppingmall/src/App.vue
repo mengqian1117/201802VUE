@@ -23,4 +23,7 @@
   .van-tabbar-item--active {
     color: orange;
   }
+  .van-search__cancel{
+    color: orange;
+  }
 </style>

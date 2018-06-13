@@ -5,6 +5,7 @@ import Home from "../components/page/Home.vue"
 import List from "../components/page/List.vue"
 import Car from "../components/page/Car.vue"
 import Personal from "../components/page/Personal.vue"
+import Order from "../components/page/Order.vue"
 export default new Router({
   routes: [
     {path:"/",component:Home},
@@ -12,5 +13,6 @@ export default new Router({
     {path:"/list",component:List},
     {path:"/car",component:Car},
     {path:"/personal",component:Personal},
+    {path:"/order/:type",component:Order,name:"order"}
   ]
 })
