@@ -9,9 +9,10 @@
     </div>
 
     <div class="goods-list">
+      <!--checkGoods 这个数组放着所有选中的商品-->
       <van-checkbox-group v-model="checkGoods">
         <div v-for="item in goods" class="goods-card">
-          <van-checkbox :disabled="!item.status" :name="item.id"></van-checkbox>
+          <van-checkbox :disabled="!item.status" :name="item"></van-checkbox>
           <van-card
             :title="item.title"
             :desc="item.desc"
@@ -39,13 +40,16 @@
     </div>
 
     <van-submit-bar
+      currency="¥"
       :disabled="!checkGoods.length"
-      :price="priceAll"
+      :price="priceAll*100"
       :button-text="isEditor?'删除':'结算'"
       @submit="onSubmit"
     >
-      <van-checkbox v-model="checked"></van-checkbox>
+      <van-checkbox v-model="checked">全选</van-checkbox>
     </van-submit-bar>
+
+
     <tabBar :active="2"></tabBar>
   </div>
 
@@ -91,20 +95,53 @@
     components: {tabBar},
     methods:{
       goodsDelete(id){
-        this.goods=this.goods.filter(item=>item.id!=id);
+        this.$dialog.confirm({
+          title:"你确定要删除吗"
+        }).then(()=>{
+          this.goods=this.goods.filter(item=>item.id!=id);
+        },()=>{});
       },
       clearGoods(){
         //留下状态是1的
         this.goods=this.goods.filter(item=>item.status);
       },
-      onSubmit(){},
+      onSubmit(){
+        //2个作用 删除,结算
+        //根据状态(isEditor)不同处理不同的操作
+        if(this.isEditor){
+          //删除 当前item 不再选中的数组(checkGoods)中就留下
+          this.goods=this.goods.filter(item=>{
+            let is=!this.checkGoods.includes(item);
+            this.checkGoods=this.checkGoods.filter(val=>val!=item);
+            return is;
+          });
+        }else {
+          //结算
+        }
+      },
     },
     computed:{
       isClear(){
         return this.goods.some(item=>!item.status);
       },
-      priceAll(){},
-      checked:{}
+      priceAll(){
+        //checkGoods 数组中的商品总价格
+        return this.checkGoods.reduce((prev,item)=> prev+item.price*item.num,0)
+      },
+      checked:{
+        get(){
+          //checkGoods 的length== 不失效的(status是1的个数)
+          let count= this.goods.reduce((prev,item)=>prev+Number(item.status),0);
+          return this.checkGoods.length==count;
+        },
+        set(val){
+          if(val){
+            this.checkGoods=this.goods.filter(item=>item.status);
+          }else {
+            this.checkGoods=[];
+          }
+        }
+      }
     }
   }
 </script>
