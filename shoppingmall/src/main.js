@@ -6,8 +6,8 @@ import router from './router'
 //导入样式
 //import "vant/lib/vant-css/index.css"
 //使用babel-plugin-import 插件实现按需导入
-import {Icon,Tabbar,TabbarItem,Lazyload,Search,Row,Col,Cell, CellGroup} from "vant"
-Vue.use(Icon).use(Tabbar).use(TabbarItem).use(Lazyload).use(Search).use(Row).use(Col).use(Cell).use(CellGroup);
+import {Icon,Tabbar,TabbarItem,Lazyload,Search,Row,Col,Cell, CellGroup,Card, Checkbox, CheckboxGroup ,Stepper,SubmitBar} from "vant"
+Vue.use(Icon).use(Tabbar).use(TabbarItem).use(Lazyload).use(Search).use(Row).use(Col).use(Cell).use(CellGroup).use(Card).use(Checkbox).use(CheckboxGroup).use(Stepper).use(SubmitBar);
 Vue.config.productionTip = false;
 //定义全局过滤器
 Vue.filter("toFixed",(target,val=2)=>{

@@ -36,6 +36,18 @@
         </swiper-slide>
       </swiper>
     </div>
+    <floor :floor="floor"></floor>
+    <div>
+      <h3 class="hot-title">热卖商品</h3>
+      <div class="hotGoods" >
+        <div class="goods" v-for="item in hotGoods" @click="$router.push({params:{goodsId:item.goodsId},name:'detail'})">
+          <img :src="item.image" width="100%">
+          <p>{{item.name}}</p>
+          <p>¥{{item.mallPrice|toFixed}}({{item.price|toFixed}})</p>
+        </div>
+      </div>
+    </div>
+
     <tabBar :active="0"></tabBar>
 
   </div>
@@ -47,7 +59,8 @@
   import slides from "../base/slides.vue"
   //导入样式 和 组件
   import "swiper/dist/css/swiper.css"
-  import {swiper,swiperSlide} from "vue-awesome-swiper"
+  import {swiper,swiperSlide} from "vue-awesome-swiper";
+  import floor from "../base/floor.vue"
   export default {
     name: "Home",
     data(){
@@ -475,11 +488,11 @@
       }
     },
     components:{
-      tabBar,slides,swiper,swiperSlide
+      tabBar,slides,swiper,swiperSlide,floor
     },
     created(){
      //this.getData();
-      console.log(this.category, this.picture, this.recommend, this.floor, this.hotGoods);
+      console.log(this.floor, this.hotGoods);
   },
   methods:{
     onSearch(){},
@@ -545,5 +558,25 @@
       }
 
     }
+  }
+  .hotGoods{
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .goods{
+      text-align: center;
+      margin: 0 5%;
+      width: 40%;
+      p{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+  .hot-title{
+    color: orangered;
+    text-align: center;
   }
 </style>
