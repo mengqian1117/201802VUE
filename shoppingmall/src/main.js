@@ -9,6 +9,10 @@ import router from './router'
 import {Icon,Tabbar,TabbarItem,Lazyload,Search,Row,Col,Cell, CellGroup} from "vant"
 Vue.use(Icon).use(Tabbar).use(TabbarItem).use(Lazyload).use(Search).use(Row).use(Col).use(Cell).use(CellGroup);
 Vue.config.productionTip = false;
+//定义全局过滤器
+Vue.filter("toFixed",(target,val=2)=>{
+  return parseFloat(target).toFixed(val)
+})
 new Vue({
   el: '#app',
   router,
